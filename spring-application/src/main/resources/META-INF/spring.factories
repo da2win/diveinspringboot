@@ -1,8 +1,14 @@
+# ApplicationContextInitializer 实现配置
 org.springframework.context.ApplicationContextInitializer=\
 com.da2win.diveinspringboot.context.AfterHelloWorldApplicationContextInitializer,\
 com.da2win.diveinspringboot.context.HelloWorldApplicationContextInitializer
 
-
+# ApplicationListener 实现配置
 org.springframework.context.ApplicationListener=\
 com.da2win.diveinspringboot.listener.AfterHelloWorldApplicationListener,\
-com.da2win.diveinspringboot.listener.HelloWorldApplicationListener
+com.da2win.diveinspringboot.listener.HelloWorldApplicationListener,\
+com.da2win.diveinspringboot.listener.BeforeConfigFileApplicationListener
+
+# SpringApplicationRunListener 实现配置
+org.springframework.boot.SpringApplicationRunListener=\
+com.da2win.diveinspringboot.run.HelloWorldRunListener
