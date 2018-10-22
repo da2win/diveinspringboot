@@ -1,3 +1,8 @@
 org.springframework.context.ApplicationContextInitializer=\
 com.da2win.diveinspringboot.context.AfterHelloWorldApplicationContextInitializer,\
 com.da2win.diveinspringboot.context.HelloWorldApplicationContextInitializer
+
+
+org.springframework.context.ApplicationListener=\
+com.da2win.diveinspringboot.listener.AfterHelloWorldApplicationListener,\
+com.da2win.diveinspringboot.listener.HelloWorldApplicationListener
