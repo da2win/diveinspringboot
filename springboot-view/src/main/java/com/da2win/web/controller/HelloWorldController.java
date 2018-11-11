@@ -1,4 +1,4 @@
-package com.da2win.web.template.engine.controller;
+package com.da2win.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,5 +1,7 @@
-package com.da2win.web.template.engine.config;
+package com.da2win.web.config;
 
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 
 /**
  * Spring Web MVC 配置类
@@ -42,6 +45,17 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 System.out.println("拦截中...");
                 return true;
             }
+        });
+    }
+
+
+    @Bean
+    public WebServerFactoryCustomizer<TomcatServletWebServerFactory> customizer() {
+        return (factory -> {
+            factory.addContextCustomizers(context -> {
+                String relativePath = "spring-view/src/main/webapp";
+                context.setDocBase(new File(relativePath).getAbsolutePath());
+            });
         });
     }
 }

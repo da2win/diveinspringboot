@@ -1,4 +1,4 @@
-package com.da2win.web.template.engine.controller;
+package com.da2win.web.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class HelloControllerAdvice {
 
     @ModelAttribute("acceptLanguage")
-    public String acceptLanguage(@RequestHeader("Accept-Language") String acceptLanguage) {
+    public String acceptLanguage(@RequestHeader(value = "Accept-Language", required = false) String acceptLanguage) {
         return acceptLanguage;
     }
 
