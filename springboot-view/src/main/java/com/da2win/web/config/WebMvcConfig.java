@@ -21,7 +21,6 @@ import java.io.File;
  * Spring Web MVC 配置类
  */
 @Configuration
-@EnableWebMvc
 public class WebMvcConfig implements WebMvcConfigurer {
 
 
@@ -53,8 +52,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public WebServerFactoryCustomizer<TomcatServletWebServerFactory> customizer() {
         return (factory -> {
             factory.addContextCustomizers(context -> {
-                String relativePath = "spring-view/src/main/webapp";
-                context.setDocBase(new File(relativePath).getAbsolutePath());
+                String relativePath = "springboot-view/src/main/webapp";
+                File docFile = new File(relativePath);
+                if (docFile.exists()) {
+                    context.setDocBase(docFile.getAbsolutePath()); //解决maven多模块 JSP 无法读取的问题
+                }
             });
         });
     }
