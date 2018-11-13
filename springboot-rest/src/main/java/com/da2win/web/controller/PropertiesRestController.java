@@ -1,5 +1,6 @@
 package com.da2win.web.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +12,8 @@ import java.util.Properties;
  * @Author Darwin
  * @Date 2018/11/14 9:03
  */
-@RestController
+//@RestController
+@Controller
 public class PropertiesRestController {
 
 

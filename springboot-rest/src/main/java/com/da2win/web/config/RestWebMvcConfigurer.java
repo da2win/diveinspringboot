@@ -1,11 +1,13 @@
 package com.da2win.web.config;
 
 import com.da2win.web.http.converter.properties.PropertiesHttpMessageConverter;
-import com.da2win.web.support.PropertiesHandlerMethodArgumentResolver;
+import com.da2win.web.method.support.PropertiesHandlerMethodArgumentResolver;
+import com.da2win.web.method.support.PropertiesHandlerMethodReturnValueHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
@@ -39,6 +41,20 @@ public class RestWebMvcConfigurer implements WebMvcConfigurer {
 
         // 重新设置 Resolver 对象
         requestMappingHandlerAdapter.setArgumentResolvers(newResolvers);
+
+        // 获取当前 HandlerMethodReturnValueHandler 所有的 Handler 对象
+        List<HandlerMethodReturnValueHandler> handlers = requestMappingHandlerAdapter.getReturnValueHandlers();
+
+        List<HandlerMethodReturnValueHandler> newHandlers = new ArrayList<>(handlers.size() + 1);
+
+        // 添加 PropertiesHandlerMethodReturnValueHandler 到集合首位
+        newHandlers.add(0, new PropertiesHandlerMethodReturnValueHandler());
+
+        // 添加已注册的 handler 对象集合
+        newHandlers.addAll(handlers);
+
+        // 重新设置 Handler 对象
+        requestMappingHandlerAdapter.setReturnValueHandlers(newHandlers);
     }
 
     @Override

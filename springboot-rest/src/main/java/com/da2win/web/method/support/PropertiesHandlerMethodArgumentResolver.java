@@ -1,7 +1,10 @@
-package com.da2win.web.support;
+package com.da2win.web.method.support;
 
+import com.da2win.web.http.converter.properties.PropertiesHttpMessageConverter;
 import org.springframework.core.MethodParameter;
+import org.springframework.http.HttpInputMessage;
 import org.springframework.http.MediaType;
+import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.ServletWebRequest;
@@ -30,26 +33,33 @@ public class PropertiesHandlerMethodArgumentResolver implements HandlerMethodArg
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 
+        // 复用 PropertiesHttpMessageConverter
+        PropertiesHttpMessageConverter converter = new PropertiesHttpMessageConverter();
+
+
         ServletWebRequest servletWebRequest = (ServletWebRequest) webRequest;
 
         // Servlet Request API 实现
         HttpServletRequest request = (HttpServletRequest) servletWebRequest.getNativeRequest();
 
-        String contentType = request.getHeader("Content-Type");
-        // 获取
-        MediaType mediaType = MediaType.parseMediaType(contentType);
+        HttpInputMessage inputMessage = new ServletServerHttpRequest(request);
 
-        Charset charset = mediaType.getCharset() == null ? Charset.forName("UTF-8") : mediaType.getCharset();
 
-        InputStream inputStream = request.getInputStream();
+        //String contentType = request.getHeader("Content-Type");
+        //// 获取
+        //MediaType mediaType = MediaType.parseMediaType(contentType);
+        //
+        //Charset charset = mediaType.getCharset() == null ? Charset.forName("UTF-8") : mediaType.getCharset();
+        //
+        //InputStream inputStream = request.getInputStream();
+        //
+        //InputStreamReader reader = new InputStreamReader(inputStream, charset);
+        //
+        //Properties properties = new Properties();
+        //
+        //// 加载字符流
+        //properties.load(reader);
 
-        InputStreamReader reader = new InputStreamReader(inputStream, charset);
-
-        Properties properties = new Properties();
-
-        // 加载字符流
-        properties.load(reader);
-
-        return properties;
+        return converter.read(null, null, inputMessage);
     }
 }
