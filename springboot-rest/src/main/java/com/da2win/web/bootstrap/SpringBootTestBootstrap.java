@@ -9,7 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Author Darwin
  * @Date 2018/11/13 15:55
  */
-@SpringBootApplication(scanBasePackages = "com.da2win.web")
+@SpringBootApplication(scanBasePackages = {
+        "com.da2win.web.controller",
+        "com.da2win.web.config"
+})
 public class SpringBootTestBootstrap {
 
     public static void main(String[] args) {
