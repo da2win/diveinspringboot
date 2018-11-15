@@ -7,9 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 
 import java.util.Random;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Callable;
+import java.util.concurrent.*;
 
 /**
  * Hello World 异步 {@link RestController}
@@ -73,6 +71,22 @@ public class HelloWorldAsyncController {
             println("执行计算结果, 消耗: " + costTime + "ms. ");
             return "Hello, World";
         };
+    }
+
+    @GetMapping("/completion-stage")
+    public CompletionStage<String> completionStage() {
+        final long startTime = System.currentTimeMillis();
+
+        println("Hello, World");
+
+        return CompletableFuture.supplyAsync(() -> {
+
+            long costTime = System.currentTimeMillis() - startTime;
+
+            println("执行计算结果, 消耗: " + costTime + "ms. ");
+
+            return "Hello World"; // 异步执行结果
+        });
     }
 
     private static void println(Object object) {
