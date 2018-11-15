@@ -9,6 +9,7 @@ import org.springframework.web.context.request.async.DeferredResult;
 import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Callable;
 
 /**
  * Hello World 异步 {@link RestController}
@@ -44,7 +45,7 @@ public class HelloWorldAsyncController {
 
     @GetMapping("/hello-world")
     public DeferredResult<String> helloWorld() {
-        DeferredResult<String> deferredResult = new DeferredResult<>();
+        DeferredResult<String> deferredResult = new DeferredResult(50L);
 
         //deferredResult.setResult("Hello, World");
         // 入队操作
@@ -61,6 +62,17 @@ public class HelloWorldAsyncController {
             println("执行超时xxxx");
         });
         return deferredResult;
+    }
+
+    @GetMapping("/callable-hello-world")
+    public Callable<String> callableHelloWorld() {
+        final long startTime = System.currentTimeMillis();
+
+        return () -> {
+            long costTime = System.currentTimeMillis() - startTime;
+            println("执行计算结果, 消耗: " + costTime + "ms. ");
+            return "Hello, World";
+        };
     }
 
     private static void println(Object object) {
