@@ -16,7 +16,7 @@ public class HelloWorldAsyncController {
 
     @GetMapping("/hello-world")
     public DeferredResult<String> helloWorld() {
-        DeferredResult<String> deferredResult = new DeferredResult<>();
+        DeferredResult<String> deferredResult = new DeferredResult<>(50L);
 
         //deferredResult.setResult("Hello, World");
         println("hello, world");
