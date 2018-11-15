@@ -47,8 +47,7 @@ public class HelloWorldAsyncController {
 
         //deferredResult.setResult("Hello, World");
         // 入队操作
-        queue.offer(deferredResult);
-
+        //queue.offer(deferredResult);
 
         println("hello, world");
 
