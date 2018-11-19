@@ -31,6 +31,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.da2win.diveinspringboot.DiveInSpringBootApplication</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>
