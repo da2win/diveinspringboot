@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import javax.servlet.DispatcherType;
@@ -24,10 +26,12 @@ public class SpringBootServletBootstrap {
     }
 
     @Bean
+    @Order(Ordered.HIGHEST_PRECEDENCE)
     public ServletRegistrationBean asyncServlet() {
-        ServletRegistrationBean registrationBean = new ServletRegistrationBean(new AsyncServlet());
-        registrationBean.addUrlMappings("/async-servlet");
-        return registrationBean;
+        //ServletRegistrationBean registrationBean = new ServletRegistrationBean(new AsyncServlet());
+        //registrationBean.addUrlMappings("/async-servlet");
+        //return registrationBean;
+        return new ServletRegistrationBean(new AsyncServlet(), "/");
     }
 
     @Bean
