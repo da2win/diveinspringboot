@@ -16,6 +16,7 @@
         <module>spring-servlet</module>
         <module>springboot-servlet</module>
         <module>spring-reactive</module>
+        <module>springboot-webflux</module>
     </modules>
     <packaging>pom</packaging>
 
