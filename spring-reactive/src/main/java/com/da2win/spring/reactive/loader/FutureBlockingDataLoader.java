@@ -15,6 +15,7 @@ public class FutureBlockingDataLoader extends DataLoader {
         runCompletely(executorService.submit(super::loadConfigurations));
         runCompletely(executorService.submit(super::loadUsers));
         runCompletely(executorService.submit(super::loadOrders));
+        // F1 -> F2 -> F3
         executorService.shutdown();
     }
 
