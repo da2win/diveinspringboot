@@ -5,6 +5,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -12,6 +13,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
+
+import static org.springframework.context.ConfigurableApplicationContext.ENVIRONMENT_BEAN_NAME;
 
 /**
  * @Author Darwin
@@ -22,6 +25,7 @@ public class ValueAnnotationBootstrap implements BeanFactoryAware {
 
 
     @Autowired
+    @Qualifier(ENVIRONMENT_BEAN_NAME)
     private Environment environment;
 
     //public ValueAnnotationBootstrap(Environment environment) {
@@ -29,7 +33,9 @@ public class ValueAnnotationBootstrap implements BeanFactoryAware {
     //}
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-        this.environment = beanFactory.getBean(Environment.class);
+        if (this.environment != beanFactory.getBean(ENVIRONMENT_BEAN_NAME, Environment.class)) {
+            throw new IllegalStateException();
+        }
     }
 
 
