@@ -48,12 +48,28 @@ public class ExtendPropertySourcesRunListener implements SpringApplicationRunLis
 
     @Override
     public void contextPrepared(ConfigurableApplicationContext context) {
-
+        ConfigurableEnvironment environment = context.getEnvironment();
+        MutablePropertySources propertySources = environment.getPropertySources();
+        Map<String, Object> source = new HashMap<>();
+        // from-environmentPrepared: 0
+        // application properties : 1
+        // META-INF/default.properties: 7
+        source.put("user.id", "39");
+        MapPropertySource propertySource = new MapPropertySource("from-contextPrepared", source);
+        propertySources.addFirst(propertySource);
     }
 
     @Override
     public void contextLoaded(ConfigurableApplicationContext context) {
-
+        ConfigurableEnvironment environment = context.getEnvironment();
+        MutablePropertySources propertySources = environment.getPropertySources();
+        Map<String, Object> source = new HashMap<>();
+        // from-environmentPrepared: 0
+        // application properties : 1
+        // META-INF/default.properties: 7
+        source.put("user.id", "49");
+        MapPropertySource propertySource = new MapPropertySource("from-contextLoaded", source);
+        propertySources.addFirst(propertySource);
     }
 
     @Override
