@@ -9,6 +9,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+import java.util.Locale;
+
 /**
  * {@link ConfigurationProperties}
  * @Author Darwin
@@ -25,6 +27,8 @@ public class ConfigurationPropertiesBootstrap {
     }
 
     public static void main(String[] args) {
+        Locale.setDefault(Locale.JAPANESE);
+
         ConfigurableApplicationContext context = new SpringApplicationBuilder(ConfigurationPropertiesBootstrap.class)
                 .web(WebApplicationType.NONE) // 非 Web 应用
                 .run(args);

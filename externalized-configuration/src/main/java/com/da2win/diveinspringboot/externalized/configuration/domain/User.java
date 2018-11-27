@@ -2,6 +2,9 @@ package com.da2win.diveinspringboot.externalized.configuration.domain;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -9,6 +12,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @Author Darwin
  * @Date 2018/11/26 14:48
  */
+@Validated
 public class User {
     private Long id;
     private String name;
@@ -22,6 +26,7 @@ public class User {
     public static class City {
 
         private String postCode;
+        @NotNull(message = "城市的名称不能为空")
         private String name;
 
         public String getPostCode() {
