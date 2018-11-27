@@ -9,3 +9,7 @@ com.da2win.diveinspringboot.externalized.configuration.listener.ExtendPropertySo
 # Post Processor
 org.springframework.boot.env.EnvironmentPostProcessor=\
 com.da2win.diveinspringboot.externalized.configuration.processor.ExtendPropertyResourcesEnvironmentPostProcessor
+
+# Application Context Initializer
+org.springframework.context.ApplicationContextInitializer=\
+com.da2win.diveinspringboot.externalized.configuration.initializer.ExtenedPropertySourcesApplicationContextInitializer
