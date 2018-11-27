@@ -3,6 +3,7 @@ package com.da2win.diveinspringboot.externalized.configuration.bootstrap;
 import com.da2win.diveinspringboot.externalized.configuration.domain.User;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -22,6 +23,7 @@ public class ConfigurationPropertiesBootstrap {
 
     @Bean
     @ConfigurationProperties(prefix = "user")
+    @ConditionalOnProperty(name = "user.city.post-code", matchIfMissing = false, havingValue = "610010")
     public User user() {
         return new User();
     }
