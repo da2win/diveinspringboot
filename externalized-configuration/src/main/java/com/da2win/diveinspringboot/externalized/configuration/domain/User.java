@@ -1,6 +1,7 @@
 package com.da2win.diveinspringboot.externalized.configuration.domain;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  *
@@ -11,10 +12,42 @@ import org.springframework.beans.factory.annotation.Value;
 public class User {
     private Long id;
     private String name;
-    @Value("${user.age}")
+    //@Value("${user.age}")
     private Integer age;
-    @Value("${user.desc:Hello, World}")
+    //@Value("${user.desc:Hello, World}")
     private String desc;
+
+    private City city = new City();
+
+    public static class City {
+
+        private String postCode;
+        private String name;
+
+        public String getPostCode() {
+            return postCode;
+        }
+
+        public void setPostCode(String postCode) {
+            this.postCode = postCode;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return "City{" +
+                    "postCode='" + postCode + '\'' +
+                    ", name='" + name + '\'' +
+                    '}';
+        }
+    }
 
 
     public Long getId() {
@@ -49,6 +82,14 @@ public class User {
         this.desc = desc;
     }
 
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -56,6 +97,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", desc='" + desc + '\'' +
+                ", city=" + city +
                 '}';
     }
 }
