@@ -1,3 +1,11 @@
 # Run Listeners
 org.springframework.boot.SpringApplicationRunListener=\
 com.da2win.diveinspringboot.externalized.configuration.listener.ExtendPropertySourcesRunListener
+
+# Event Listeners
+org.springframework.context.ApplicationListener=\
+com.da2win.diveinspringboot.externalized.configuration.listener.ExtendPropertySourcesEventListener
+
+# Post Processor
+org.springframework.boot.env.EnvironmentPostProcessor=\
+com.da2win.diveinspringboot.externalized.configuration.processor.ExtendPropertyResourcesEnvironmentPostProcessor
